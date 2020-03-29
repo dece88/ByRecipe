@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/register_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_border_container"
+        android:padding="25dp">
+
+        <ImageView
+            android:id="@+id/register_logo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/logo_byrecipe"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/register_edit_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_logo"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text|textCapWords"
+            android:hint="    Full Name"
+            android:drawableRight="@drawable/user"/>
+
+        <EditText
+            android:id="@+id/register_edit_nophone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_edit_fullname"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:hint="    No Phone"
+            android:drawableRight="@drawable/phone"/>
+
+        <EditText
+            android:id="@+id/register_edit_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_edit_nophone"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:hint="    Address"
+            android:drawableRight="@drawable/address"/>
+
+        <EditText
+            android:id="@+id/register_edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_edit_address"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:hint="    Email"
+            android:drawableRight="@drawable/mail"/>
+
+        <EditText
+            android:id="@+id/register_edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_edit_email"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:inputType="textPassword"
+            android:hint="    Password"
+            android:drawableRight="@drawable/key"/>
+
+        <EditText
+            android:id="@+id/register_edit_repassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_edit_password"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:inputType="textPassword"
+            android:hint="    Re Password"
+            android:drawableRight="@drawable/key"/>
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/register_edit_repassword"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_border_button"
+            android:text="Register"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</LinearLayout>
