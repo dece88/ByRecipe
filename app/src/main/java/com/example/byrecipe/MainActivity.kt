@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val btnLoginActivity: Button = findViewById(R.id.button_login)
         btnLoginActivity.setOnClickListener(this)
+
+        val btnProfileActivity: Button = findViewById(R.id.button_myProfile)
+        btnProfileActivity.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -21,6 +24,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.button_login -> {
                 val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(moveToLogin)
+            }
+
+            R.id.button_myProfile -> {
+                val moveToProfile = Intent(this@MainActivity, UserProfileActivity::class.java)
+                startActivity(moveToProfile)
             }
         }
     }
