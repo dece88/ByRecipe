@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditUserProfileActivity"
+    android:background="@drawable/edit_profile_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_border_container"
+        android:padding="25dp"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/edit_profile_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="Edit Profile"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"/>
+
+
+        <EditText
+            android:id="@+id/edit_profile_edit_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/edit_profile_text"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text|textCapWords"
+            android:hint="    Full Name"
+            android:drawableRight="@drawable/user"/>
+
+        <EditText
+            android:id="@+id/edit_profile_edit_nophone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/edit_profile_edit_fullname"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:hint="    No Phone"
+            android:drawableRight="@drawable/phone"/>
+
+        <EditText
+            android:id="@+id/edit_profile_edit_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/edit_profile_edit_nophone"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:hint="    Address"
+            android:drawableRight="@drawable/address"/>
+
+        <EditText
+            android:id="@+id/edit_profile_edit_gender"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/edit_profile_edit_address"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:hint="    Male or Female"
+            android:drawableRight="@drawable/gender"/>
+
+        <EditText
+            android:id="@+id/edit_profile_edit_age"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/edit_profile_edit_gender"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:hint="    Age"
+            android:drawableRight="@drawable/umur"/>
+
+        <FrameLayout
+            android:id="@+id/edit_profile_frame_changePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_profile_edit_age"
+            android:layout_margin="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_profile_frame_changePassword"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/edit_profile_button_changePassword"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_border_button_blue"
+                android:text="Change Password"
+                android:textColor="@android:color/black"
+                android:textSize="10sp"
+                android:elevation="5dp"/>
+
+            <Button
+                android:id="@+id/edit_profile_button_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_border_button_red"
+                android:text="Done"
+                android:textColor="@android:color/black"
+                android:textSize="11sp"
+                android:elevation="5dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

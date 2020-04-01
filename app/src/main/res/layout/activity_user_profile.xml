@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/user_profile_activity"
-    tools:context=".LoginActivity"
+    tools:context=".UserProfileActivity"
     android:background="@drawable/user_profile_background">
 
     <RelativeLayout
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Raffi Verel Alessandro"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:paddingLeft="40dp"/>
@@ -225,6 +225,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/user_profile_button_editProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_profile_data"
@@ -237,6 +238,7 @@
             android:background="@drawable/rounded_border_button_red"
             android:drawableRight="@drawable/pensil"
             android:paddingRight="10dp"
-            android:paddingLeft="20dp"/>
+            android:paddingLeft="20dp"
+            android:elevation="5dp"/>
     </RelativeLayout>
 </ScrollView>
