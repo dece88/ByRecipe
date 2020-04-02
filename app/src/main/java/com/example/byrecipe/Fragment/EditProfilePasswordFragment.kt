@@ -1,9 +1,6 @@
 package com.example.byrecipe.Fragment
 
 
-import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.Intent.getIntentOld
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.FragmentManager
-import com.example.byrecipe.EditUserProfileActivity
 
 import com.example.byrecipe.R
 
@@ -35,10 +31,9 @@ class EditProfilePasswordFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id){
             R.id.edit_profile_button_confirm_changePassword -> {
-                val mEditProfilePasswordFragment = EditProfilePasswordFragment()
                 val mFragmentManager = fragmentManager as FragmentManager
-                mFragmentManager.beginTransaction().remove(mEditProfilePasswordFragment).commit()
-                getActivity()?.finish()
+                val mEmptyFragment = EmptyFragment()
+                mFragmentManager.beginTransaction().replace(R.id.edit_profile_frame_changePassword, mEmptyFragment, EmptyFragment::class.java.simpleName).commit()
             }
         }
     }

@@ -1,11 +1,11 @@
-package com.example.byrecipe
+package com.example.byrecipe.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import com.example.byrecipe.Fragment.EditProfilePasswordFragment
+import com.example.byrecipe.R
 
 class EditUserProfileActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -26,8 +26,8 @@ class EditUserProfileActivity : AppCompatActivity(), View.OnClickListener {
 
                 if(fragment !is EditProfilePasswordFragment){
                     mFragmentManager.beginTransaction().add(R.id.edit_profile_frame_changePassword, mEditProfilePasswordFragment, EditProfilePasswordFragment::class.java.simpleName).commit()
-                    val btnChangePassword: Button = findViewById(R.id.edit_profile_button_changePassword)
-                    btnChangePassword.setEnabled(false)
+                } else {
+                    mFragmentManager.beginTransaction().replace(R.id.edit_profile_frame_changePassword, mEditProfilePasswordFragment, EditProfilePasswordFragment::class.java.simpleName).commit()
                 }
             }
         }

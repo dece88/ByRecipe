@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/user_profile_activity"
-    tools:context=".UserProfileActivity"
+    tools:context=".Activity.UserProfileActivity"
     android:background="@drawable/user_profile_background">
 
     <RelativeLayout
