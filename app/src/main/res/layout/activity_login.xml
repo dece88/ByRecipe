@@ -46,7 +46,6 @@
             android:hint="    Email"
             android:drawableRight="@drawable/mail"/>
 
-
         <EditText
             android:id="@+id/login_edit_password"
             android:layout_width="match_parent"

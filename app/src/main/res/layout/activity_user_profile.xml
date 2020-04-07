@@ -84,6 +84,7 @@
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
+                android:id="@+id/user_profile_jumlah_recipe"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="30dp"
                 android:layout_width="wrap_content"
@@ -121,7 +122,7 @@
                 android:id="@+id/user_profile_text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="daniel.christianto3@gmail.com"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -144,7 +145,7 @@
                 android:id="@+id/user_profile_text_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Taman Kopo Indah 1 C 69"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -167,7 +168,7 @@
                 android:id="@+id/user_profile_text_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0878 - 2412 - 2724"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
 
@@ -190,7 +191,7 @@
                 android:id="@+id/user_profile_text_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Male"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
 
@@ -213,7 +214,7 @@
                 android:id="@+id/user_profile_text_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="21"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
 

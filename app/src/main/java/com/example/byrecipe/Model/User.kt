@@ -1,25 +1,53 @@
 package com.example.byrecipe.Model
 
-class User {
-    var email:String?=null
-    var password:String?=null
-    var fullname:String?=null
-    var noPhone:String?=null
-    var address:String?=null
-    var gender:String?=null
-    var age:Int=0
-    var image:String?=null
+import android.os.Parcel
+import android.os.Parcelable
 
-    constructor(){}
+class User(
+    var email: String?,
+    var password: String?,
+    var fullname: String?,
+    var noPhone: String?,
+    var address: String?,
+    var gender: String?,
+    var age:Int?,
+    var image:String?
+) : Parcelable {
 
-    constructor(email:String, password:String, fullname:String, noPhone:String, address:String, gender:String, age:Int, image:String){
-        this.email = email
-        this.password = password
-        this.fullname = fullname
-        this.noPhone = noPhone
-        this.address = address
-        this.gender = gender
-        this.age = age
-        this.image = image
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString()
+    ) {}
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(email)
+        parcel.writeString(password)
+        parcel.writeString(fullname)
+        parcel.writeString(noPhone)
+        parcel.writeString(address)
+        parcel.writeString(gender)
+        parcel.writeValue(age)
+        parcel.writeString(image)
     }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<User> {
+        override fun createFromParcel(parcel: Parcel): User {
+            return User(parcel)
+        }
+
+        override fun newArray(size: Int): Array<User?> {
+            return arrayOfNulls(size)
+        }
+    }
+
 }

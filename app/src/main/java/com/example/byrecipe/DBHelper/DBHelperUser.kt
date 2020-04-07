@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.byrecipe.Model.User
 
-class DBHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
+class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
 
     companion object{
         private val DATABASE_VER = 1
-        private val DATABASE_NAME = "ByRecipe.db"
+        private val DATABASE_NAME = "ByRecipe.dbUser"
 
         //Table
         private val TABLE_NAME="User"
@@ -43,7 +43,7 @@ class DBHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, 
         val cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
             do {
-                val user = User()
+                val user = User("", "", "", "", "", "", 0, "")
                 user.email = cursor.getString(cursor.getColumnIndex(COL_EMAIL))
                 user.password = cursor.getString(cursor.getColumnIndex(COL_PASSWORD))
                 user.fullname = cursor.getString(cursor.getColumnIndex(COL_FULLNAME))
