@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import com.example.byrecipe.DBHelper.DBHelperUser
 import com.example.byrecipe.Model.User
 import com.example.byrecipe.R
 import kotlinx.android.synthetic.main.activity_user_profile.*
 
 class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var user: User
+    private lateinit var dbUser: DBHelperUser
 
     companion object{
         const val USER = "session user"
@@ -29,6 +31,8 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     fun setUserProfile(){
         user = intent.getParcelableExtra(USER) as User //get session User2
+        dbUser = DBHelperUser(this)
+        dbUser.updateUser(user)
         user_profile_text_name.setText(user.fullname)
         user_profile_text_email.setText(user.email)
         user_profile_text_address.setText(user.address)

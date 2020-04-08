@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity(),  View.OnClickListener {
 
             R.id.login_button_signin -> {
                 var user: User?= null
-                dbUser = DBHelperUser(this)
+                dbUser = DBHelperUser(this) //pemanggilan DataBase
                 var cek:Boolean = false
                 listUser = dbUser.allUser
                 for(data in listUser){
@@ -63,14 +63,12 @@ class LoginActivity : AppCompatActivity(),  View.OnClickListener {
                 if(cek){
                     val builder = AlertDialog.Builder(this)
                     builder.setTitle("Login Succes!")
-                    builder.setMessage("Welcome!")
-//                    builder.setPositiveButton("Continue"){_, _ ->
-//
-//                    }
+                    builder.setMessage("Welcome! " + user?.fullname)
                     builder.setPositiveButton("Continue", DialogInterface.OnClickListener { _, _ ->
                         val moveToHome = Intent(this@LoginActivity, MainActivity::class.java)
                         moveToHome.putExtra(MainActivity.USER, user)
                         startActivity(moveToHome)
+                        finish()
                     })
                     builder.show()
 

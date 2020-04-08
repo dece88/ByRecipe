@@ -28,15 +28,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnProfileActivity.setOnClickListener(this)
     }
 
-    fun setUserProfile(): Boolean{
-        user = intent.getParcelableExtra(USER) as User //get session User
-        if(user != null){
-            return true
-        } else {
-            return false
-        }
-    }
-
     override fun onClick(v: View) {
         when(v.id){
             R.id.button_login -> {
@@ -45,10 +36,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.button_myProfile -> {
-                user = intent.getParcelableExtra(USER) as User //get session User
-                val moveToProfile = Intent(this@MainActivity, UserProfileActivity::class.java)
-                moveToProfile.putExtra(UserProfileActivity.USER, user)
-                startActivity(moveToProfile)
+                if(intent.getParcelableExtra<User>(USER) != null){
+                    user = intent.getParcelableExtra(USER) as User //get session User
+                    val moveToProfile = Intent(this@MainActivity, UserProfileActivity::class.java)
+                    moveToProfile.putExtra(UserProfileActivity.USER, user)
+                    startActivity(moveToProfile)
+                } else {
+                    val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
             }
         }
     }
