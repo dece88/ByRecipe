@@ -11,7 +11,7 @@ class User(
     var address: String?,
     var gender: String?,
     var age:Int?,
-    var image:String?
+    var code: String?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -33,7 +33,7 @@ class User(
         parcel.writeString(address)
         parcel.writeString(gender)
         parcel.writeValue(age)
-        parcel.writeString(image)
+        parcel.writeString(code)
     }
 
     override fun describeContents(): Int {

@@ -2,8 +2,11 @@ package com.example.byrecipe.DBHelper
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.example.byrecipe.Model.User
 
 class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
@@ -21,18 +24,19 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         private val COL_ADDRESS="Address"
         private val COL_GENDER="Gender"
         private val COL_AGE="Age"
+        private val COL_CODE="Code"
         private val COL_IMAGE="Image"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_EMAIL TEXT PRIMARY KEY, $COL_PASSWORD TEXT, $COL_FULLNAME TEXT, $COL_NOPHONE TEXT, $COL_ADDRESS TEXT, $COL_GENDER TEXT, $COL_AGE INTEGER, $COL_IMAGE TEXT)")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_EMAIL TEXT PRIMARY KEY, $COL_PASSWORD TEXT, $COL_FULLNAME TEXT, $COL_NOPHONE TEXT, $COL_ADDRESS TEXT, $COL_GENDER TEXT, $COL_AGE INTEGER, $COL_CODE TEXT, $COL_IMAGE BLOB)")
 
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
-        onCreate(db!!)
+        onCreate(db)
     }
 
     //CRUD
@@ -40,7 +44,7 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         val listUsers = ArrayList<User>()
         val selectQuery = "SELECT * FROM $TABLE_NAME"
         val db = this.writableDatabase
-        val cursor = db.rawQuery(selectQuery, null)
+        val cursor: Cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
             do {
                 val user = User("", "", "", "", "", "", 0, "")
@@ -49,15 +53,36 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
                 user.fullname = cursor.getString(cursor.getColumnIndex(COL_FULLNAME))
                 user.noPhone = cursor.getString(cursor.getColumnIndex(COL_NOPHONE))
                 user.address = cursor.getString(cursor.getColumnIndex(COL_ADDRESS))
-                user.gender= cursor . getString (cursor.getColumnIndex(COL_GENDER))
+                user.gender= cursor.getString (cursor.getColumnIndex(COL_GENDER))
                 user.age = cursor.getInt(cursor.getColumnIndex(COL_AGE))
-                user.image = cursor.getString(cursor.getColumnIndex(COL_IMAGE))
+                user.code = cursor.getString(cursor.getColumnIndex(COL_CODE))
 
                 listUsers.add(user)
             } while(cursor.moveToNext())
         }
         db.close()
         return listUsers
+    }
+
+    fun addUserSetFirst(user: User){
+        val selectQuery = "SELECT $COL_EMAIL FROM $TABLE_NAME WHERE $COL_EMAIL='"+user.email+"'"
+        val db = this.writableDatabase
+        val cursor: Cursor = db.rawQuery(selectQuery, null)
+        if (cursor.moveToFirst()==false) {
+            val values = ContentValues()
+            values.put(COL_EMAIL, user.email)
+            values.put(COL_PASSWORD, user.password)
+            values.put(COL_FULLNAME, user.fullname)
+            values.put(COL_NOPHONE, user.noPhone)
+            values.put(COL_ADDRESS, user.address)
+            values.put(COL_GENDER, user.gender)
+            values.put(COL_AGE, user.age)
+            values.put(COL_CODE, user.code)
+            values.putNull(COL_IMAGE)
+
+            db.insert(TABLE_NAME, null, values)
+        }
+        db.close()
     }
 
     fun addUser(user: User){
@@ -70,7 +95,7 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         values.put(COL_ADDRESS, user.address)
         values.put(COL_GENDER, user.gender)
         values.put(COL_AGE, user.age)
-        values.put(COL_IMAGE, user.image)
+        values.putNull(COL_IMAGE)
 
         db.insert(TABLE_NAME, null, values)
         db.close()
@@ -86,9 +111,47 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         values.put(COL_ADDRESS, user.address)
         values.put(COL_GENDER, user.gender)
         values.put(COL_AGE, user.age)
-        values.put(COL_IMAGE, user.image)
 
         return db.update(TABLE_NAME, values, "$COL_EMAIL=?", arrayOf(user.email.toString()))
+    }
+
+    fun updatePasswordUser(email: String, newPassword: String): Int{
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put(COL_PASSWORD, newPassword)
+
+        return db.update(TABLE_NAME, values, "$COL_EMAIL=?", arrayOf(email))
+    }
+
+    fun updateImageProfile(user: User,  dataImage: ByteArray): Int{
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put(COL_IMAGE, dataImage)
+
+        return db.update(TABLE_NAME, values, "$COL_EMAIL=?", arrayOf(user.email.toString()))
+    }
+
+    fun getImageProfile(user: User): Bitmap? {
+        var bmImage: Bitmap?
+        val selectQuery = "SELECT $COL_IMAGE FROM $TABLE_NAME WHERE $COL_EMAIL='" + user.email.toString() + "'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor.moveToFirst()){
+            if(cursor.getBlob(0)!=null){
+                var imgByte: ByteArray = cursor.getBlob(0)
+                bmImage = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.size)
+                cursor.close()
+                return bmImage
+            } else {
+                return null
+            }
+        } else {
+            cursor.close()
+        }
+        return null
     }
 
     fun deleteUser(user: User){

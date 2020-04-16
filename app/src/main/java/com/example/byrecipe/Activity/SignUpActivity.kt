@@ -40,8 +40,13 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                                 if(!register_edit_fullname.text.isEmpty()){
                                     if(!register_edit_age.text.isEmpty()){
                                         if(!register_edit_password.text.isEmpty()){
-                                            if(register_edit_repassword.text.isEmpty()){
-                                                dialogFunction("Alert!", "Please flll repassword!")
+                                            if(!register_edit_repassword.text.isEmpty()){
+                                                if(register_edit_code.text.isEmpty()){
+                                                    dialogFunction("Alert!", "Please fill code!")
+                                                    cekField = false
+                                                }
+                                            } else {
+                                                dialogFunction("Alert!", "Please fill repassword!")
                                                 cekField = false
                                             }
                                         } else {
@@ -82,7 +87,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
                     register_edit_address.text.toString(),
                     register_edit_gender.text.toString(),
                     if(register_edit_age.text.isEmpty()){ 0 } else {Integer.parseInt(register_edit_age.text.toString())},
-                    "")
+                    register_edit_code.text.toString()
+                )
 
                 //Pengecekan kebutuhan pengisian
                 if(cekField) {

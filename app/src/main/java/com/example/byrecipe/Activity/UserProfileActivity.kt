@@ -9,6 +9,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.MediaStore.Images.Media.getBitmap
 import android.view.View
 import android.webkit.ValueCallback
 import android.widget.Button
@@ -17,7 +18,9 @@ import com.example.byrecipe.DBHelper.DBHelperUser
 import com.example.byrecipe.Model.User
 import com.example.byrecipe.R
 import kotlinx.android.synthetic.main.activity_user_profile.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.InputStream
 
 class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var user: User
@@ -27,7 +30,6 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
     companion object{
         const val USER = "session user"
         const val PICK_IMAGE: Int = 100
-        const val UPDATE_DATA: Int = 200
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +55,12 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
         user_profile_text_phone.setText(user.noPhone)
         user_profile_text_gender.setText(user.gender)
         user_profile_text_age.setText(user.age.toString())
+        //getImage
+        var dataImageProfile: Bitmap? = dbUser.getImageProfile(user) //ambil dari database
+        if(dataImageProfile!=null){
+            val imageView: ImageView = findViewById(R.id.profile_image)
+            imageView.setImageBitmap(dataImageProfile) //diset
+        }
     }
 
     override fun onClick(v: View) {
@@ -73,14 +81,30 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if((resultCode == Activity.RESULT_OK) and (requestCode==PICK_IMAGE)){
-            imageProfile = data?.getData()!!
+            imageProfile = data?.getData()!! //get result from gallery
+            
+            var inputImage: InputStream = this.getContentResolver().openInputStream(imageProfile)!! //buat ubah uri menjadi stream
+            var bmImage: Bitmap = BitmapFactory.decodeStream(inputImage) //dari stream diubah menjadi bitmap
+            inputImage.close()
+            var dataImage: ByteArray = getBitmapAsByteArray(bmImage) //mengubah bitmap menjadi byteArray karena BLOB type nya ByteArray
+            dbUser = DBHelperUser(this)
+            dbUser.updateImageProfile(user, dataImage) //update di database
+
+            var dataImageProfile: Bitmap? = dbUser.getImageProfile(user) //ambil dari database
+
             val imageView: ImageView = findViewById(R.id.profile_image)
-            imageView.setImageURI(imageProfile)
+            imageView.setImageBitmap(dataImageProfile) //diset
         } else {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Alert!")
             builder.setMessage("Picture is broken!")
         }
+    }
+
+    fun getBitmapAsByteArray(bmImage: Bitmap): ByteArray{
+        var outputStream: ByteArrayOutputStream = ByteArrayOutputStream()
+        bmImage.compress(Bitmap.CompressFormat.JPEG, 0, outputStream)
+        return outputStream.toByteArray()
     }
 
 }
