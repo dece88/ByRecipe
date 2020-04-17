@@ -1,10 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ContactActivity">
+    tools:context=".Activity.ContactActivity"
+    android:background="@drawable/contact_background">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_border_container"
+        android:padding="25dp"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/contact_logo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/contact"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/contact_text_capt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_logo"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:justificationMode="inter_word"
+            android:text="@string/contact_caption"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/contact_text_telp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_text_capt"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:justificationMode="inter_word"
+            android:text="   087824122724"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:drawableLeft="@drawable/phone"/>
+
+        <TextView
+            android:id="@+id/contact_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_text_telp"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:justificationMode="inter_word"
+            android:text="   ByRecipe@gmail.com"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:drawableLeft="@drawable/mail"/>
+
+        <EditText
+            android:id="@+id/contact_edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/contact_text_email"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:hint="    Email"
+            android:drawableRight="@drawable/mail"/>
+
+        <EditText
+            android:id="@+id/contact_edit_comment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/contact_edit_email"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text|textMultiLine"
+            android:hint="    Enter your Comment Here" />
+
+        <Button
+            android:id="@+id/contact_button_send"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_below="@id/contact_edit_comment"
+            android:background="@drawable/rounded_border_button_red"
+            android:text="Send"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/contact_sosmed"
+            android:layout_below="@id/contact_button_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/facebook"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/instagram"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/twitter"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/pinterest"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_sosmed"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text=" @2020 by ByRecipe"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+
+    </RelativeLayout>
+</LinearLayout>

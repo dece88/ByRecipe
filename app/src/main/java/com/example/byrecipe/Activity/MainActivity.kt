@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val btnProfileActivity: Button = findViewById(R.id.button_myProfile)
         btnProfileActivity.setOnClickListener(this)
 
+        val btnContactActivity: Button = findViewById(R.id.button_contact)
+        btnContactActivity.setOnClickListener(this)
+
         val btnLogout: Button = findViewById(R.id.button_logout)
         btnLogout.setOnClickListener(this)
     }
@@ -58,6 +61,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
                     startActivity(moveToLogin)
                 }
+            }
+
+            R.id.button_contact -> {
+                val moveToContact = Intent(this@MainActivity, ContactActivity::class.java)
+                startActivity(moveToContact)
             }
 
             R.id.button_logout -> {
