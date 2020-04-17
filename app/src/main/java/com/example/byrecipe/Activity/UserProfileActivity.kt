@@ -36,19 +36,19 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        setUserProfile() //function to get and set session user
 
         //Set of button
         val btnChangePicture: Button = findViewById(R.id.user_profile_button_changePicture)
         btnChangePicture.setOnClickListener(this)
+
         val btnEditProfile: Button = findViewById(R.id.user_profile_button_editProfile)
         btnEditProfile.setOnClickListener(this)
     }
 
     fun setUserProfile(){
-        user = intent.getParcelableExtra(USER) as User //get session User2
         dbUser = DBHelperUser(this)
-        dbUser.updateUser(user)
+        user = intent.getParcelableExtra(USER) as User //get session User2
+//        dbUser.updateUser(user)
         user_profile_text_name.setText(user.fullname)
         user_profile_text_email.setText(user.email)
         user_profile_text_address.setText(user.address)
@@ -69,6 +69,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
                 val moveToEditProfile = Intent(this@UserProfileActivity, EditUserProfileActivity::class.java)
                 moveToEditProfile.putExtra(EditUserProfileActivity.USER, user)
                 startActivity(moveToEditProfile)
+                finish()
             }
 
             R.id.user_profile_button_changePicture -> {
@@ -107,4 +108,8 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
         return outputStream.toByteArray()
     }
 
+    override fun onStart() {
+        setUserProfile() //function to get and set session user
+        super.onStart()
+    }
 }

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.example.byrecipe.DBHelper.DBHelperUser
 import com.example.byrecipe.Fragment.EditProfilePasswordFragment
 import com.example.byrecipe.Model.User
 import com.example.byrecipe.R
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_edit_profile_password.*
 class EditUserProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var user: User
+    private lateinit var dbUser: DBHelperUser
 
     companion object{
         const val USER = "session user"
@@ -65,10 +67,12 @@ class EditUserProfileActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.edit_profile_button_done -> {
                 user.fullname = edit_profile_edit_fullname.text.toString()
-                user.noPhone = edit_profile_edit_fullname.text.toString()
+                user.noPhone = edit_profile_edit_nophone.text.toString()
                 user.address = edit_profile_edit_address.text.toString()
                 user.gender = edit_profile_edit_gender.text.toString()
                 user.age = Integer.parseInt(edit_profile_edit_age.text.toString())
+                dbUser = DBHelperUser(this)
+                dbUser.updateUser(user)
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Change Profile!")
                 builder.setMessage("Profile has been changed!")

@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.button_myProfile -> {
                 if(intent.getParcelableExtra<User>(USER) != null){
-                    user = intent.getParcelableExtra(USER) as User //get session User
+                    dbUser = DBHelperUser(this)
+                    user = dbUser.addUserSetFirst(intent.getParcelableExtra(USER) as User) //get session User
                     val moveToProfile = Intent(this@MainActivity, UserProfileActivity::class.java)
                     moveToProfile.putExtra(UserProfileActivity.USER, user)
                     startActivity(moveToProfile)

@@ -122,7 +122,7 @@ class LoginActivity : AppCompatActivity(),  View.OnClickListener {
             var account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)!!
             var user = User(account.email.toString(), "", account.displayName.toString(), "", "", "", 0, "")
             dbUser = DBHelperUser(this) //pemanggilan DataBase
-            dbUser.addUserSetFirst(user)
+            user = dbUser.addUserSetFirst(user)
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Login Using Google Succes!")
             builder.setMessage("Welcome! " + account.displayName)
