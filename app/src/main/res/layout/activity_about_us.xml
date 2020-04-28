@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Activity.AboutUsActivity">
+
+    <LinearLayout
+        android:id="@+id/team_member_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:id="@+id/team_member_image_1"
+            android:layout_width="153dp"
+            android:layout_height="155dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/user2" />
+
+        <TextView
+            android:id="@+id/name_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Daniel Christanto"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/age_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/profession_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Software Engineer"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/team_member_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:layout_below="@id/team_member_1"
+        android:layout_marginTop="36dp">
+
+        <ImageView
+            android:id="@+id/team_member_image_2"
+            android:layout_width="153dp"
+            android:layout_height="155dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/user2" />
+
+        <TextView
+            android:id="@+id/name_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Benedict Reydo"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/age_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/profession_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Software Engineer"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/team_member_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:layout_below="@id/team_member_2"
+        android:layout_marginTop="36dp">
+
+        <ImageView
+            android:id="@+id/team_member_image_3"
+            android:layout_width="153dp"
+            android:layout_height="155dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/user2" />
+
+        <TextView
+            android:id="@+id/name_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Raffi Verrel Alessandro"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/age_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/profession_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Software Engineer"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+</RelativeLayout>
