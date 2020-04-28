@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.BooksActivity"></activity>
-        <activity android:name=".BookActivity" />
+        <activity android:name=".Activity.ContactActivity"></activity>
         <activity android:name=".Activity.EditUserProfileActivity" />
         <activity android:name=".Activity.UserProfileActivity" />
         <activity android:name=".Activity.ForgotPasswordActivity" />

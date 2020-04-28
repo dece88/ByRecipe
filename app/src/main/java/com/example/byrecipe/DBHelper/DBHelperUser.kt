@@ -64,7 +64,7 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         return listUsers
     }
 
-    fun addUserSetFirst(user: User){
+    fun addUserSetFirst(user: User): User{
         val selectQuery = "SELECT $COL_EMAIL FROM $TABLE_NAME WHERE $COL_EMAIL='"+user.email+"'"
         val db = this.writableDatabase
         val cursor: Cursor = db.rawQuery(selectQuery, null)
@@ -81,8 +81,24 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
             values.putNull(COL_IMAGE)
 
             db.insert(TABLE_NAME, null, values)
+            return user
+        } else {
+            var selectQuery2 = "SELECT * FROM $TABLE_NAME WHERE $COL_EMAIL='"+user.email+"'"
+            val cursor2: Cursor = db.rawQuery(selectQuery2, null)
+            if(cursor2.moveToFirst()){
+                user.email = cursor2.getString(cursor2.getColumnIndex(COL_EMAIL))
+                user.password = cursor2.getString(cursor2.getColumnIndex(COL_PASSWORD))
+                user.fullname = cursor2.getString(cursor2.getColumnIndex(COL_FULLNAME))
+                user.noPhone = cursor2.getString(cursor2.getColumnIndex(COL_NOPHONE))
+                user.address = cursor2.getString(cursor2.getColumnIndex(COL_ADDRESS))
+                user.gender= cursor2.getString (cursor2.getColumnIndex(COL_GENDER))
+                user.age = cursor2.getInt(cursor2.getColumnIndex(COL_AGE))
+                user.code = cursor2.getString(cursor2.getColumnIndex(COL_CODE))
+                return user
+            }
         }
         db.close()
+        return user
     }
 
     fun addUser(user: User){
@@ -95,6 +111,7 @@ class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         values.put(COL_ADDRESS, user.address)
         values.put(COL_GENDER, user.gender)
         values.put(COL_AGE, user.age)
+        values.put(COL_CODE, user.code)
         values.putNull(COL_IMAGE)
 
         db.insert(TABLE_NAME, null, values)
