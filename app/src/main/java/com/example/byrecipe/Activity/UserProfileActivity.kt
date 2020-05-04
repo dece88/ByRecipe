@@ -17,6 +17,7 @@ import android.widget.ImageView
 import com.example.byrecipe.DBHelper.DBHelperUser
 import com.example.byrecipe.Model.User
 import com.example.byrecipe.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -41,7 +42,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
         val btnChangePicture: Button = findViewById(R.id.user_profile_button_changePicture)
         btnChangePicture.setOnClickListener(this)
 
-        val btnEditProfile: Button = findViewById(R.id.user_profile_button_editProfile)
+        val btnEditProfile: FloatingActionButton = findViewById(R.id.user_profile_button_editProfile)
         btnEditProfile.setOnClickListener(this)
     }
 

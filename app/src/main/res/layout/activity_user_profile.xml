@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,247 +9,236 @@
     tools:context=".Activity.UserProfileActivity"
     android:background="@drawable/user_profile_background">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/user_profile_image"
+        <RelativeLayout
+            android:id="@+id/user_profile_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="50dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@drawable/user2"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/profile_image" />
-
-                <Button
-                    android:id="@+id/user_profile_button_changePicture"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:drawableLeft="@drawable/kamera"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/holo_red_light"
-                    android:background="@drawable/rounded_border_button_blue"
-                    android:layout_gravity="bottom|right"/>
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/user_profile_text_name"
+            <LinearLayout
+                android:id="@+id/user_profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="22sp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:paddingLeft="40dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/user_profile_recipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/user_profile_image"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/rounded_border_container"
-            android:elevation="5dp">
-
-            <ImageView
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/bukurecipe"/>
-
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/darker_gray"
-                android:textColor="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/user_profile_jumlah_recipe"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:text="162 Recipes"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/tertiary_text_dark"/>
-        </LinearLayout>
+                android:layout_marginTop="50dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp">
 
-        <LinearLayout
-            android:id="@+id/user_profile_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/user_profile_recipe"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:padding="30dp"
-            android:orientation="vertical"
-            android:background="@drawable/rounded_border_container"
-            android:elevation="5dp">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            <TextView
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/user2"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/profile_image" />
+
+                    <Button
+                        android:id="@+id/user_profile_button_changePicture"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:drawableLeft="@drawable/kamera"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/holo_red_light"
+                        android:background="@drawable/rounded_border_button_blue"
+                        android:layout_gravity="bottom|right"/>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/user_profile_text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="22sp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:paddingLeft="40dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_profile_recipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="EMAIL"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"
-                android:drawableRight="@drawable/mail"/>
-
-            <TextView
-                android:id="@+id/user_profile_text_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:text="ADDRESS"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"
-                android:drawableRight="@drawable/address"/>
-
-            <TextView
-                android:id="@+id/user_profile_text_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="NO PHONE"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"
-                android:drawableRight="@drawable/phone"/>
-
-            <TextView
-                android:id="@+id/user_profile_text_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:text="GENDER"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"
-                android:drawableRight="@drawable/gender"/>
-
-            <TextView
-                android:id="@+id/user_profile_text_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:text="AGE"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"
-                android:drawableRight="@drawable/umur"/>
-
-            <TextView
-                android:id="@+id/user_profile_text_age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/user_profile_button_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/user_profile_data"
-            android:orientation="vertical"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:padding="30dp"
-            android:elevation="5dp">
-
-            <Button
-                android:id="@+id/user_profile_button_editProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_below="@id/user_profile_image"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:text="Edit Profile"
-                android:textColor="@android:color/black"
-                android:background="@drawable/rounded_border_button_red"
-                android:drawableRight="@drawable/pensil"
-                android:paddingRight="10dp"
-                android:paddingLeft="20dp"
-                android:elevation="5dp"/>
-        </LinearLayout>
-    </RelativeLayout>
-</ScrollView>
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_border_container"
+                android:elevation="5dp">
+
+                <ImageView
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/bukurecipe"/>
+
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/darker_gray"
+                    android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/user_profile_jumlah_recipe"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="162 Recipes"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/tertiary_text_dark"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_profile_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_profile_recipe"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:padding="30dp"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_border_container"
+                android:elevation="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="EMAIL"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/mail"/>
+
+                <TextView
+                    android:id="@+id/user_profile_text_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="ADDRESS"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/address"/>
+
+                <TextView
+                    android:id="@+id/user_profile_text_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="NO PHONE"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/phone"/>
+
+                <TextView
+                    android:id="@+id/user_profile_text_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="GENDER"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/gender"/>
+
+                <TextView
+                    android:id="@+id/user_profile_text_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="AGE"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/umur"/>
+
+                <TextView
+                    android:id="@+id/user_profile_text_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginBottom="15dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/user_profile_button_editProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@android:color/holo_red_light"
+        app:srcCompat="@drawable/edit_black"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

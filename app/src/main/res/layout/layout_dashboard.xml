@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/utama"
+            android:layout_width="wrap_content"
+            android:layout_height="732dp"
+            android:background="@drawable/home"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/navigationBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:contentDescription="Navigation Bar"
+                android:src="@drawable/ic_navigation_bar_white"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="200dp"
+                android:layout_height="350dp"
+                android:alpha="0.7"
+                android:background="@drawable/box_home"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tambahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/utama">
+
+            <TextView
+                android:layout_width="410dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:gravity="center|left"
+                android:text="Trending Recipe"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tambahan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tambahan">
+
+            <TextView
+                android:layout_width="410dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:gravity="center|left"
+                android:text="My Recipe"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
