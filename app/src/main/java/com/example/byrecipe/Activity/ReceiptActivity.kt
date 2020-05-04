@@ -8,44 +8,56 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.byrecipe.DBHelper.DBHelperUser
+import com.example.byrecipe.Model.ListResep
+import com.example.byrecipe.Model.Resep
 import com.example.byrecipe.Model.User
 import com.example.byrecipe.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_recipe.*
+import kotlinx.android.synthetic.main.click_recipe.*
 import kotlinx.android.synthetic.main.header_menu.*
-import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_side_menu.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-    var user: User? = null //session user
-    private lateinit var dbUser: DBHelperUser
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
+class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
 
-    companion object{
-        const val USER = "session user"
-    }
+    private var list = ArrayList<Resep>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_recipe)
 
-        //Set of button
-//        val btnLoginActivity: Button = findViewById(R.id.button_login)
-//        btnLoginActivity.setOnClickListener(this)
-//
-//        val btnProfileActivity: Button = findViewById(R.id.button_myProfile)
-//        btnProfileActivity.setOnClickListener(this)
-//
-//        val btnContactActivity: Button = findViewById(R.id.button_contact)
-//        btnContactActivity.setOnClickListener(this)
-//
-//        val btnLogout: Button = findViewById(R.id.button_logout)
-//        btnLogout.setOnClickListener(this)
-        onSetNavigationDrawerEvents()
+        rv_recipe.setHasFixedSize(true)
+
+        list.addAll(getListResep())
+        showRecyclerList()
+    }
+
+    fun getListResep(): ArrayList<Resep> {
+        val dataName = resources.getStringArray(R.array.data_name)
+        val dataDescription = resources.getStringArray(R.array.data_description)
+        val dataPhoto = resources.getStringArray(R.array.data_photo)
+
+        val listResep = ArrayList<Resep>()
+        for(position in dataName.indices){
+            val resep = Resep(
+                dataName[position],
+                dataDescription[position],
+                dataPhoto[position]
+            )
+            listResep.add(resep)
+        }
+        return listResep
+    }
+
+    private fun showRecyclerList(){
+        rv_recipe.layoutManager = LinearLayoutManager(this)
+        val listResepAdapter = ListResep(list)
+        rv_recipe.adapter = listResepAdapter
     }
 
     private fun onSetNavigationDrawerEvents() {
@@ -64,55 +76,57 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id){
             R.id.navigationBar -> {
-                drawerLayout.openDrawer(navigationView, true)
+                drawerLayout.openDrawer(navigationView2, true)
             }
             R.id.ll_First -> {
                 showToast("Home")
-                drawerLayout.closeDrawer(navigationView, true)
+                drawerLayout.closeDrawer(navigationView2, true)
+                val moveToHome = Intent(this@ReceiptActivity,MainActivity::class.java)
+                startActivity(moveToHome)
             }
             R.id.ll_Second -> {
                 showToast("Books")
-                drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this@MainActivity, ReceiptActivity::class.java)
+                drawerLayout.closeDrawer(navigationView2, true)
+                val moveToRecipe = Intent(this@ReceiptActivity, ReceiptActivity::class.java)
                 startActivity(moveToRecipe)
             }
             R.id.ll_Third -> {
                 showToast("About")
-                drawerLayout.closeDrawer(navigationView, true)
+                drawerLayout.closeDrawer(navigationView2, true)
             }
             R.id.ll_Fourth -> {
                 showToast("Contact")
-                drawerLayout.closeDrawer(navigationView, true)
-                val moveToContact = Intent(this@MainActivity, ContactActivity::class.java)
+                drawerLayout.closeDrawer(navigationView2, true)
+                val moveToContact = Intent(this@ReceiptActivity, ContactActivity::class.java)
                 startActivity(moveToContact)
             }
             R.id.ll_Fifth -> {
                 showToast("ll_Fifth")
-                drawerLayout.closeDrawer(navigationView, true)
+                drawerLayout.closeDrawer(navigationView2, true)
             }
             R.id.ll_Sixth -> {
-                val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
+                val moveToLogin = Intent(this@ReceiptActivity, LoginActivity::class.java)
                 startActivity(moveToLogin)
             }
             R.id.ll_Seventh -> {
-                val moveToSignUp = Intent(this@MainActivity, SignUpActivity::class.java)
+                val moveToSignUp = Intent(this@ReceiptActivity, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
             }
             else -> {
                 showToast("Default")
-                drawerLayout.closeDrawer(navigationView, true)
+                drawerLayout.closeDrawer(navigationView2, true)
             }
 
         }
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@ReceiptActivity, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(navigationView)) {
-            drawerLayout.closeDrawer(navigationView, true)
+        if (drawerLayout.isDrawerOpen(navigationView2)) {
+            drawerLayout.closeDrawer(navigationView2, true)
         } else {
             super.onBackPressed()
         }
@@ -120,16 +134,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-    }
-
-    override fun onStart() {
-        setHardcodeData()
-        super.onStart()
-    }
-
-    fun setHardcodeData(){
-        dbUser = DBHelperUser(this)
-        var data = User("daniel@gmail.com", "123", "Daniel Silombo", "087824122724", "TKI", "Male", 20, "007")
-        dbUser.addUserSetFirst(data)
     }
 }

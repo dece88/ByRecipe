@@ -17,6 +17,8 @@
         <activity android:name=".Activity.ForgotPasswordActivity" />
         <activity android:name=".Activity.SignUpActivity" />
         <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.ReceiptActivity"/>
+        <activity android:name=".Activity.test"/>
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

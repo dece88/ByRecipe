@@ -4,4 +4,37 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="contact_caption">Considering we still not good enough, please kindly to make some support for us by submitting the message.</string>
+
+    <string-array name="data_name">
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+        <item>Oglio olio</item>
+    </string-array>
+
+    <string-array name="data_description">
+        <item>35 minute</item>
+        <item>35 minute</item>
+        <item>35 minute</item>
+        <item>35 minute</item>
+        <item>35 minute</item>
+        <item>35 minute</item>
+        <item>35 minute</item>
+        <item>35 minute</item>
+    </string-array>
+
+    <string-array name="data_photo">
+        <item>@drawable/oglioolio</item>
+        <item>@drawable/oglioolio</item>
+        <item>https://en.wikipedia.org/wiki/Spaghetti_aglio_e_olio#/media/File:Aglio_e_olio.jpg</item>
+        <item>https://en.wikipedia.org/wiki/Spaghetti_aglio_e_olio#/media/File:Aglio_e_olio.jpg</item>
+        <item>https://en.wikipedia.org/wiki/Spaghetti_aglio_e_olio#/media/File:Aglio_e_olio.jpg</item>
+        <item>https://en.wikipedia.org/wiki/Spaghetti_aglio_e_olio#/media/File:Aglio_e_olio.jpg</item>
+        <item>https://en.wikipedia.org/wiki/Spaghetti_aglio_e_olio#/media/File:Aglio_e_olio.jpg</item>
+        <item>https://en.wikipedia.org/wiki/Spaghetti_aglio_e_olio#/media/File:Aglio_e_olio.jpg</item>
+    </string-array>
 </resources>
