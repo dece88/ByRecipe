@@ -29,7 +29,7 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recipe)
+        setContentView(R.layout.click_recipe)
 
         rv_recipe.setHasFixedSize(true)
 
@@ -64,15 +64,15 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
 
     private fun onSetNavigationDrawerEvents() {
         navigationBar.setOnClickListener(this)
-//        ll_First.setOnClickListener(this)
-//        ll_Second.setOnClickListener(this)
-//        ll_Third.setOnClickListener(this)
-//        ll_Fourth.setOnClickListener(this)
-//        ll_Fifth.setOnClickListener(this)
-//        ll_Sixth.setOnClickListener(this)
-//        ll_Seventh.setOnClickListener(this)
-//        iv_logout.setOnClickListener(this)
-//        tv_logout.setOnClickListener(this)
+        ll_First.setOnClickListener(this)
+        ll_Second.setOnClickListener(this)
+        ll_Third.setOnClickListener(this)
+        ll_Fourth.setOnClickListener(this)
+        ll_Fifth.setOnClickListener(this)
+        ll_Sixth.setOnClickListener(this)
+        ll_Seventh.setOnClickListener(this)
+        iv_logout.setOnClickListener(this)
+        tv_logout.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -85,6 +85,7 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
                 drawerLayout.closeDrawer(navigationView2, true)
                 val moveToHome = Intent(this@ReceiptActivity,MainActivity::class.java)
                 startActivity(moveToHome)
+                finish()
             }
             R.id.ll_Second -> {
                 showToast("Books")
