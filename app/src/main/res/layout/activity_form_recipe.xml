@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SignUpActivity"
+    tools:context=".Activity.FormRecipeActivity"
     android:background="@drawable/form_recipe_background">
 
     <RelativeLayout
@@ -63,11 +63,34 @@
             android:hint="    Time"
             android:drawableRight="@drawable/alarm"/>
 
+        <RadioGroup
+            android:id="@+id/radio_group_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/form_page_time"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton android:id="@+id/radio_steak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Steak"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <RadioButton android:id="@+id/radio_bakery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bakery"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </RadioGroup>
+
         <EditText
             android:id="@+id/form_page_ingredients"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@id/form_page_time"
+            android:layout_below="@id/radio_group_category"
             android:layout_margin="4dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
@@ -98,6 +121,8 @@
             android:inputType="text|textMultiLine"
             android:hint="    Note Tahapan"
             android:drawableRight="@drawable/note"/>
+
+
 
         <LinearLayout
             android:id="@+id/page_form_layout"

@@ -33,18 +33,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Set of button
-//        val btnLoginActivity: Button = findViewById(R.id.button_login)
-//        btnLoginActivity.setOnClickListener(this)
-//
-//        val btnProfileActivity: Button = findViewById(R.id.button_myProfile)
-//        btnProfileActivity.setOnClickListener(this)
-//
-//        val btnContactActivity: Button = findViewById(R.id.button_contact)
-//        btnContactActivity.setOnClickListener(this)
-//
-//        val btnLogout: Button = findViewById(R.id.button_logout)
-//        btnLogout.setOnClickListener(this)
+        if(intent.getParcelableExtra<User>(USER) == null){
+            button_logout.setVisibility(View.GONE)
+        } else {
+            button_logout.setVisibility(View.VISIBLE)
+        }
+
         onSetNavigationDrawerEvents()
     }
 
@@ -60,6 +54,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ll_Eigth.setOnClickListener(this)
         iv_logout.setOnClickListener(this)
         tv_logout.setOnClickListener(this)
+        button_logout.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -103,9 +98,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val moveToSignUp = Intent(this@MainActivity, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
             }
+
             R.id.ll_Eigth -> {
+                if(intent.getParcelableExtra<User>(USER) != null){
+                    dbUser = DBHelperUser(this)
+                    user = dbUser.addUserSetFirst(intent.getParcelableExtra(USER) as User) //get session User
+                    val moveToProfile = Intent(this@MainActivity, UserProfileActivity::class.java)
+                    moveToProfile.putExtra(UserProfileActivity.USER, user)
+                    startActivity(moveToProfile)
+                } else {
+                    val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
                 showToast("Account")
                 drawerLayout.closeDrawer(navigationView,true)
+            }
+
+            R.id.button_logout -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Log Out!")
+                builder.setMessage("Are you sure want to Log Out?")
+                builder.setPositiveButton("Log Out", DialogInterface.OnClickListener { _, _ ->
+                    val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                    mGoogleSignInClient.signOut()
+                })
+                builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->
+                    //
+                })
+                builder.show()
             }
             else -> {
                 showToast("Default")

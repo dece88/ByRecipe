@@ -33,8 +33,6 @@ class LoginActivity : AppCompatActivity(),  View.OnClickListener {
         setContentView(R.layout.activity_login)
 
 
-
-
         //configure sign-in to request the user data
         //basic profile include in DEFAULT_SIGN_IN
         val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()

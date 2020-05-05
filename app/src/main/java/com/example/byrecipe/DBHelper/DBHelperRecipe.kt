@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.byrecipe.Model.Recipe
 
-class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.DATABASE_NAME, null, DBHelperUser.DATABASE_VER) {
+class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe.DATABASE_NAME, null, DBHelperRecipe.DATABASE_VER) {
 
     companion object{
         private val DATABASE_VER = 1
@@ -95,7 +95,7 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
 //        return user
 //    }
 //
-    fun addUser(recipe: Recipe){
+    fun addRecipe(recipe: Recipe){
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAMA, recipe.nama)
@@ -103,25 +103,25 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
         values.put(COL_TAHAPAN, recipe.tahapan)
         values.put(COL_WAKTU, recipe.waktu)
         values.put(COL_OWNER, recipe.waktu)
+        values.put(COL_CATEGORY, recipe.category)
         values.putNull(COL_IMAGE)
 
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
-//
-//    fun updateUser(user: User):Int{
-//        val db = this.writableDatabase
-//        val values = ContentValues()
-//        values.put(COL_EMAIL, user.email)
-//        values.put(COL_PASSWORD, user.password)
-//        values.put(COL_FULLNAME, user.fullname)
-//        values.put(COL_NOPHONE, user.noPhone)
-//        values.put(COL_ADDRESS, user.address)
-//        values.put(COL_GENDER, user.gender)
-//        values.put(COL_AGE, user.age)
-//
-//        return db.update(TABLE_NAME, values, "$COL_EMAIL=?", arrayOf(user.email.toString()))
-//    }
+
+    fun updateRecipe(recipe: Recipe):Int{
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_NAMA, recipe.nama)
+        values.put(COL_INGREDIENTS, recipe.ingredients)
+        values.put(COL_TAHAPAN, recipe.tahapan)
+        values.put(COL_WAKTU, recipe.waktu)
+        values.put(COL_OWNER, recipe.waktu)
+        values.put(COL_CATEGORY, recipe.category)
+
+        return db.update(TABLE_NAME, values, "$COL_NAMA=?", arrayOf(recipe.nama.toString()))
+    }
 //
 //    fun updatePasswordUser(email: String, newPassword: String): Int{
 //        val db = this.writableDatabase
