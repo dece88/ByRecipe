@@ -33,7 +33,7 @@ class BooksActivity : AppCompatActivity(), View.OnClickListener {
 
         val ALaCarteBtn = findViewById<Button>(R.id.alacarteBtn)
         ALaCarteBtn.setOnClickListener{
-            val intent = Intent(this, ReceiptActivity::class.java)
+            val intent = Intent(this, ClickReceiptActivity::class.java)
             startActivity(intent)
         }
 
