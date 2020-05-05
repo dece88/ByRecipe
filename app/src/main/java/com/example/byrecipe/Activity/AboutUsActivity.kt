@@ -1,17 +1,29 @@
 package com.example.byrecipe.Activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.byrecipe.Model.User
 import com.example.byrecipe.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.header_menu.*
 import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_side_menu.*
 
 class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    lateinit var user: User
+
+    companion object{
+        const val USER = "session user"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +32,9 @@ class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     private fun onSetNavigationDrawerEvents() {
+        if(intent.getParcelableExtra<User>(UserProfileActivity.USER) != null){
+            user = intent.getParcelableExtra(UserProfileActivity.USER) as User //get session User2
+        }
         navigationBar.setOnClickListener(this)
         ll_First.setOnClickListener(this)
         ll_Second.setOnClickListener(this)
@@ -28,8 +43,10 @@ class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
         ll_Fifth.setOnClickListener(this)
         ll_Sixth.setOnClickListener(this)
         ll_Seventh.setOnClickListener(this)
+        ll_Eigth.setOnClickListener(this)
         iv_logout.setOnClickListener(this)
         tv_logout.setOnClickListener(this)
+        button_logout.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -40,20 +57,26 @@ class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_First -> {
                 showToast("Home")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToHome = Intent(this, MainActivity::class.java)
-                startActivity(moveToHome)
+                val moveToMain = Intent(this, MainActivity::class.java)
+                moveToMain.putExtra(MainActivity.USER, user)
+                startActivity(moveToMain)
+                finish()
             }
             R.id.ll_Second -> {
                 showToast("Books")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this, BooksActivity::class.java)
-                startActivity(moveToRecipe)
+                if(intent.getParcelableExtra<User>(MainActivity.USER) != null){
+                    val moveToBooks = Intent(this, BooksActivity::class.java)
+                    moveToBooks.putExtra(BooksActivity.USER, user)
+                    startActivity(moveToBooks)
+                } else {
+                    val moveToLogin = Intent(this, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
             }
             R.id.ll_Third -> {
                 showToast("About")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToAbout = Intent(this, AboutUsActivity::class.java)
-                startActivity(moveToAbout)
             }
             R.id.ll_Fourth -> {
                 showToast("Contact")
@@ -64,6 +87,14 @@ class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_Fifth -> {
                 showToast("ll_Fifth")
                 drawerLayout.closeDrawer(navigationView, true)
+                if(intent.getParcelableExtra<User>(MainActivity.USER) != null){
+                    val moveToMyRecipe = Intent(this, ReceiptActivity::class.java)
+                    moveToMyRecipe.putExtra(ReceiptActivity.USER, user)
+                    startActivity(moveToMyRecipe)
+                } else {
+                    val moveToLogin = Intent(this, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
             }
             R.id.ll_Sixth -> {
                 val moveToLogin = Intent(this, LoginActivity::class.java)
@@ -72,6 +103,36 @@ class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_Seventh -> {
                 val moveToSignUp = Intent(this, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
+            }
+            R.id.ll_Eigth -> {
+                if(intent.getParcelableExtra<User>(MainActivity.USER) != null){
+                    val moveToProfile = Intent(this, UserProfileActivity::class.java)
+                    moveToProfile.putExtra(UserProfileActivity.USER, user)
+                    startActivity(moveToProfile)
+                } else {
+                    val moveToLogin = Intent(this, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
+                showToast("Account")
+                drawerLayout.closeDrawer(navigationView,true)
+            }
+
+            R.id.button_logout -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Log Out!")
+                builder.setMessage("Are you sure want to Log Out?")
+                builder.setPositiveButton("Log Out", DialogInterface.OnClickListener { _, _ ->
+                    val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                    mGoogleSignInClient.signOut()
+                    val moveToLogin = Intent(this, MainActivity::class.java)
+                    startActivity(moveToLogin)
+                    finish()
+                })
+                builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->
+                    //
+                })
+                builder.show()
             }
             else -> {
                 showToast("Default")
@@ -97,5 +158,14 @@ class AboutUsActivity : AppCompatActivity(), View.OnClickListener{
         super.onDestroy()
     }
 
-
+    override fun onStart() {
+        if(intent.getParcelableExtra<User>(MainActivity.USER) == null){
+            button_logout.setVisibility(View.GONE)
+        } else {
+            button_logout.setVisibility(View.VISIBLE)
+            ll_Seventh.setVisibility(View.GONE)
+            ll_Sixth.setVisibility(View.GONE)
+        }
+        super.onStart()
+    }
 }

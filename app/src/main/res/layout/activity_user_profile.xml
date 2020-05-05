@@ -18,13 +18,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/navigationBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity=""
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="350dp"
+                android:contentDescription="Navigation Bar"
+                android:src="@drawable/ic_navigation_bar_white" />
+
             <LinearLayout
                 android:id="@+id/user_profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/navigationBar"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp">
 

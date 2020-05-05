@@ -33,11 +33,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(intent.getParcelableExtra<User>(USER) == null){
-            button_logout.setVisibility(View.GONE)
-        } else {
-            button_logout.setVisibility(View.VISIBLE)
-        }
 
         onSetNavigationDrawerEvents()
     }
@@ -67,29 +62,48 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 drawerLayout.closeDrawer(navigationView, true)
             }
             R.id.ll_Second -> {
+                if(intent.getParcelableExtra<User>(USER) != null){
+                    dbUser = DBHelperUser(this)
+                    user = dbUser.addUserSetFirst(intent.getParcelableExtra(USER) as User) //get session User
+                    val moveToBooks = Intent(this@MainActivity, BooksActivity::class.java)
+                    moveToBooks.putExtra(BooksActivity.USER, user)
+                    startActivity(moveToBooks)
+                } else {
+                    val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
                 showToast("Books")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this@MainActivity, BooksActivity::class.java)
-                startActivity(moveToRecipe)
             }
             R.id.ll_Third -> {
                 showToast("About")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this@MainActivity, AboutUsActivity::class.java)
-                startActivity(moveToRecipe)
+                val moveToAbout = Intent(this@MainActivity, AboutUsActivity::class.java)
+                moveToAbout.putExtra(AboutUsActivity.USER, user)
+                startActivity(moveToAbout)
             }
             R.id.ll_Fourth -> {
                 showToast("Contact")
                 drawerLayout.closeDrawer(navigationView, true)
                 val moveToContact = Intent(this@MainActivity, ContactActivity::class.java)
+                moveToContact.putExtra(ContactActivity.USER, user)
                 startActivity(moveToContact)
             }
             R.id.ll_Fifth -> {
+                if(intent.getParcelableExtra<User>(USER) != null){
+                    dbUser = DBHelperUser(this)
+                    user = dbUser.addUserSetFirst(intent.getParcelableExtra(USER) as User) //get session User
+                    val moveToMyRecipe = Intent(this@MainActivity, ReceiptActivity::class.java)
+                    moveToMyRecipe.putExtra(ReceiptActivity.USER, user)
+                    startActivity(moveToMyRecipe)
+                } else {
+                    val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
                 showToast("My Recipe")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToMyRecipe = Intent(this@MainActivity, ReceiptActivity::class.java)
-                startActivity(moveToMyRecipe)
             }
+
             R.id.ll_Sixth -> {
                 val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(moveToLogin)
@@ -122,6 +136,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
                     mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
                     mGoogleSignInClient.signOut()
+                    val moveToLogin = Intent(this@MainActivity, MainActivity::class.java)
+                    startActivity(moveToLogin)
+                    finish()
                 })
                 builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->
                     //
@@ -154,6 +171,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onStart() {
         setHardcodeData()
+        if(intent.getParcelableExtra<User>(USER) == null){
+            button_logout.setVisibility(View.GONE)
+        } else {
+            button_logout.setVisibility(View.VISIBLE)
+            ll_Seventh.setVisibility(View.GONE)
+            ll_Sixth.setVisibility(View.GONE)
+        }
         super.onStart()
     }
 

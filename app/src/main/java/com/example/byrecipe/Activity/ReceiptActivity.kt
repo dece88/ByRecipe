@@ -18,9 +18,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recipe.*
+import kotlinx.android.synthetic.main.activity_recipe.navigationBar
 import kotlinx.android.synthetic.main.click_recipe.*
+import kotlinx.android.synthetic.main.click_recipe.drawerLayout
+import kotlinx.android.synthetic.main.click_recipe.navigationView
 import kotlinx.android.synthetic.main.header_menu.*
+import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_side_menu.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -28,14 +33,20 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
+    lateinit var user: User
     private lateinit var adapter: RecipeAdapter
-    private var list = ArrayList<Recipe>()
     private lateinit var recipeHelper: DBHelperRecipe
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    companion object{
+        const val USER = "session user"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.click_recipe)
         onSetNavigationDrawerEvents()
+
         recipeHelper = DBHelperRecipe(this)
 
         supportActionBar?.title = "Notes"
@@ -57,8 +68,10 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
         ll_Fifth.setOnClickListener(this)
         ll_Sixth.setOnClickListener(this)
         ll_Seventh.setOnClickListener(this)
+        ll_Eigth.setOnClickListener(this)
         iv_logout.setOnClickListener(this)
         tv_logout.setOnClickListener(this)
+        button_logout.setOnClickListener(this)
         recipe_plus.setOnClickListener {
             val intent = Intent(this@ReceiptActivity, FormRecipeActivity::class.java)
             startActivityForResult(intent, FormRecipeActivity.REQUEST_ADD)
@@ -66,8 +79,9 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     private fun loadRecipesAsync() {
+        user = intent.getParcelableExtra(UserProfileActivity.USER) as User //get session User2
         GlobalScope.launch(Dispatchers.Main) {
-            val recipes = recipeHelper.allRecipe
+            val recipes = recipeHelper.allRecipe //tinggal buat function
 
             if (recipes.size > 0) {
                 adapter.listRecipes = recipes as ArrayList<Recipe>
@@ -122,24 +136,30 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_First -> {
                 showToast("Home")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToHome = Intent(this@ReceiptActivity,MainActivity::class.java)
-                startActivity(moveToHome)
+                val moveToMain = Intent(this, MainActivity::class.java)
+                moveToMain.putExtra(MainActivity.USER, user)
+                startActivity(moveToMain)
                 finish()
             }
             R.id.ll_Second -> {
                 showToast("Books")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this@ReceiptActivity, ReceiptActivity::class.java)
-                startActivity(moveToRecipe)
+                val moveToBooks = Intent(this, BooksActivity::class.java)
+                moveToBooks.putExtra(BooksActivity.USER, user)
+                startActivity(moveToBooks)
             }
             R.id.ll_Third -> {
                 showToast("About")
                 drawerLayout.closeDrawer(navigationView, true)
+                val moveToAbout = Intent(this, AboutUsActivity::class.java)
+                moveToAbout.putExtra(AboutUsActivity.USER, user)
+                startActivity(moveToAbout)
             }
             R.id.ll_Fourth -> {
                 showToast("Contact")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToContact = Intent(this@ReceiptActivity, ContactActivity::class.java)
+                val moveToContact = Intent(this, ContactActivity::class.java)
+                moveToContact.putExtra(ContactActivity.USER, user)
                 startActivity(moveToContact)
             }
             R.id.ll_Fifth -> {
@@ -154,9 +174,39 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
                 val moveToSignUp = Intent(this@ReceiptActivity, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
             }
+            R.id.ll_Eigth -> {
+                if(intent.getParcelableExtra<User>(MainActivity.USER) != null){
+                    val moveToProfile = Intent(this, UserProfileActivity::class.java)
+                    moveToProfile.putExtra(UserProfileActivity.USER, user)
+                    startActivity(moveToProfile)
+                } else {
+                    val moveToLogin = Intent(this, LoginActivity::class.java)
+                    startActivity(moveToLogin)
+                }
+                showToast("Account")
+                drawerLayout.closeDrawer(navigationView,true)
+            }
+
+            R.id.button_logout -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Log Out!")
+                builder.setMessage("Are you sure want to Log Out?")
+                builder.setPositiveButton("Log Out", DialogInterface.OnClickListener { _, _ ->
+                    val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+                    mGoogleSignInClient.signOut()
+                    val moveToLogin = Intent(this, MainActivity::class.java)
+                    startActivity(moveToLogin)
+                    finish()
+                })
+                builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->
+                    //
+                })
+                builder.show()
+            }
             R.id.recipe_plus -> {
                 val moveToAddRecipe = Intent(this@ReceiptActivity, FormRecipeActivity::class.java)
-                startActivity(moveToAddRecipe)
+                startActivityForResult(moveToAddRecipe, FormRecipeActivity.REQUEST_ADD)
             }
             else -> {
                 showToast("Default")
@@ -181,6 +231,17 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
     override fun onDestroy() {
         super.onDestroy()
         recipeHelper.close()
+    }
+
+    override fun onStart() {
+        if(intent.getParcelableExtra<User>(MainActivity.USER) == null){
+            button_logout.setVisibility(View.GONE)
+        } else {
+            button_logout.setVisibility(View.VISIBLE)
+            ll_Seventh.setVisibility(View.GONE)
+            ll_Sixth.setVisibility(View.GONE)
+        }
+        super.onStart()
     }
 
 }
