@@ -6,6 +6,7 @@ import android.os.Parcelable
 
 class Recipe(
     var nama:String?,
+    var ingredients:String?,
     var tahapan:String?,
     var waktu:String?,
     var owner: String?
@@ -15,11 +16,13 @@ class Recipe(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         parcel.readString()
     ) {}
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(nama)
+        parcel.writeString(ingredients)
         parcel.writeString(tahapan)
         parcel.writeString(waktu)
         parcel.writeString(owner)

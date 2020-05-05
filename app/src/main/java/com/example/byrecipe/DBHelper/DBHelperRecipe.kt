@@ -16,6 +16,7 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
         //Table
         private val TABLE_NAME="Recipe"
         private val COL_NAMA="Nama"
+        private val COL_INGREDIENTS = "Ingredients"
         private val COL_TAHAPAN="Tahapan"
         private val COL_WAKTU="Waktu"
         private val COL_OWNER="Owner"
@@ -23,7 +24,7 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_NAMA TEXT, $COL_TAHAPAN TEXT, $COL_WAKTU TEXT, $COL_OWNER TEXT, $COL_IMAGE BLOB)")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_NAMA TEXT, $COL_INGREDIENTS TEXT,$COL_TAHAPAN TEXT, $COL_WAKTU TEXT, $COL_OWNER TEXT, $COL_IMAGE BLOB)")
 
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
@@ -41,8 +42,9 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
         val cursor: Cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
             do {
-                val recipe = Recipe("", "", "", "")
+                val recipe = Recipe("", "", "", "", "")
                 recipe.nama = cursor.getString(cursor.getColumnIndex(COL_NAMA))
+                recipe.ingredients = cursor.getString(cursor.getColumnIndex(COL_INGREDIENTS))
                 recipe.tahapan = cursor.getString(cursor.getColumnIndex(COL_TAHAPAN))
                 recipe.waktu = cursor.getString(cursor.getColumnIndex(COL_WAKTU))
                 recipe.owner = cursor.getString(cursor.getColumnIndex(COL_OWNER))
@@ -95,6 +97,7 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAMA, recipe.nama)
+        values.put(COL_INGREDIENTS, recipe.ingredients)
         values.put(COL_TAHAPAN, recipe.tahapan)
         values.put(COL_WAKTU, recipe.waktu)
         values.put(COL_OWNER, recipe.waktu)

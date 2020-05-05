@@ -73,6 +73,7 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
         ll_Seventh.setOnClickListener(this)
         iv_logout.setOnClickListener(this)
         tv_logout.setOnClickListener(this)
+        recipe_plus.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -114,6 +115,10 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_Seventh -> {
                 val moveToSignUp = Intent(this@ReceiptActivity, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
+            }
+            R.id.recipe_plus -> {
+                val moveToAddRecipe = Intent(this@ReceiptActivity, FormRecipeActivity::class.java)
+                startActivity(moveToAddRecipe)
             }
             else -> {
                 showToast("Default")
