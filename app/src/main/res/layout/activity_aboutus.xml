@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AboutUsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="WELCOME"
+                android:textColor="#FFF"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/head2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/head">
+
+            <ImageView
+                android:id="@+id/navigationBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:contentDescription="Navigation Bar"
+                android:src="@drawable/ic_navigation_bar_white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/head"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="About"
+                android:textSize="35sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/team_member_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about">
+
+            <LinearLayout
+                android:id="@+id/member_image_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="153dp"
+                    android:layout_height="155dp"
+                    android:layout_gravity="left"
+                    app:srcCompat="@drawable/dc" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/member_image_1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Daniel Cristianto"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/age_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="1"
+                    android:text="Age : 23"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/profession_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:text="Head Chef Siloam Group "
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/member_image_1"
+                android:layout_marginTop="15dp"
+                android:textSize="25dp"
+                android:text="Healthy mind and body and spirit !" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/team_member_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/team_member_1">
+
+            <LinearLayout
+                android:id="@+id/member_image_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="153dp"
+                    android:layout_height="155dp"
+                    android:layout_gravity="left"
+                    app:srcCompat="@drawable/bene" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/member_image_2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Silverius Benedict"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/age_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="1"
+                    android:text="Age : 20"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/profession_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:text="Head Chef Hyatt Group"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/member_image_2"
+                android:layout_marginTop="15dp"
+                android:textSize="25dp"
+                android:text="We hope to continue contributing in making good quality future chef in this industry" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/team_member_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/team_member_2">
+
+            <LinearLayout
+                android:id="@+id/member_image_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="153dp"
+                    android:layout_height="155dp"
+                    android:layout_gravity="left"
+                    app:srcCompat="@drawable/andro" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/member_image_3">
+
+                <TextView
+                    android:id="@+id/name_3"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Raffi Verrel Alessandro"/>
+
+                <TextView
+                    android:id="@+id/age_3"
+                    android:layout_weight="1"
+                    android:layout_marginTop="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Age : 23"/>
+
+                <TextView
+                    android:id="@+id/profession_3"
+                    android:layout_weight="1"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Head Chef Padma Group "/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/member_image_3"
+                android:layout_marginTop="15dp"
+                android:textSize="25dp"
+                android:text="Take a good look for the best recipe food we already made these past year."/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

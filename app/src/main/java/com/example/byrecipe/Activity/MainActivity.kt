@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_Second -> {
                 showToast("Books")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this@MainActivity, ReceiptActivity::class.java)
+                val moveToRecipe = Intent(this@MainActivity, BooksActivity::class.java)
                 startActivity(moveToRecipe)
             }
             R.id.ll_Third -> {

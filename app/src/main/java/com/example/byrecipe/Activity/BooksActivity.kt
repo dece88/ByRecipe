@@ -1,65 +1,43 @@
 package com.example.byrecipe.Activity
 
-import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.byrecipe.DBHelper.DBHelperUser
-import com.example.byrecipe.Model.ListResep
-import com.example.byrecipe.Model.Resep
-import com.example.byrecipe.Model.User
+import androidx.appcompat.app.AppCompatActivity
 import com.example.byrecipe.R
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
-import kotlinx.android.synthetic.main.activity_recipe.*
-import kotlinx.android.synthetic.main.click_recipe.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.header_menu.*
+import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_side_menu.*
 
-class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
 
-    private var list = ArrayList<Resep>()
+class BooksActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.click_recipe)
+        setContentView(R.layout.click_books)
 
-        rv_recipe.setHasFixedSize(true)
+        val ALaCarteBtn = findViewById<Button>(R.id.alacarteBtn)
+        ALaCarteBtn.setOnClickListener{
+            val intent = Intent(this, ReceiptActivity::class.java)
+            startActivity(intent)
+        }
 
-        list.addAll(getListResep())
-        showRecyclerList()
+        val bakeryBtn = findViewById<Button>(R.id.bakeryBtn)
+        bakeryBtn.setOnClickListener{
+//            val intent = Intent(this, BakeryActivity::class.java)
+//            startActivity(intent)
+        }
+
+        val steakBtn = findViewById<Button>(R.id.steakBtn)
+        steakBtn.setOnClickListener{
+//            val intent = Intent(this, BakeryActivity::class.java)
+//            startActivity(intent)
+        }
 
         onSetNavigationDrawerEvents()
-    }
-
-    fun getListResep(): ArrayList<Resep> {
-        val dataName = resources.getStringArray(R.array.data_name)
-        val dataDescription = resources.getStringArray(R.array.data_description)
-        val dataPhoto = resources.getStringArray(R.array.data_photo)
-
-        val listResep = ArrayList<Resep>()
-        for(position in dataName.indices){
-            val resep = Resep(
-                dataName[position],
-                dataDescription[position],
-                dataPhoto[position]
-            )
-            listResep.add(resep)
-        }
-        return listResep
-    }
-
-    private fun showRecyclerList(){
-        rv_recipe.layoutManager = LinearLayoutManager(this)
-        val listResepAdapter = ListResep(list)
-        rv_recipe.adapter = listResepAdapter
     }
 
     private fun onSetNavigationDrawerEvents() {
@@ -83,14 +61,11 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_First -> {
                 showToast("Home")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToHome = Intent(this@ReceiptActivity,MainActivity::class.java)
-                startActivity(moveToHome)
-                finish()
             }
             R.id.ll_Second -> {
                 showToast("Books")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToRecipe = Intent(this@ReceiptActivity, ReceiptActivity::class.java)
+                val moveToRecipe = Intent(this, BooksActivity::class.java)
                 startActivity(moveToRecipe)
             }
             R.id.ll_Third -> {
@@ -100,7 +75,7 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
             R.id.ll_Fourth -> {
                 showToast("Contact")
                 drawerLayout.closeDrawer(navigationView, true)
-                val moveToContact = Intent(this@ReceiptActivity, ContactActivity::class.java)
+                val moveToContact = Intent(this, ContactActivity::class.java)
                 startActivity(moveToContact)
             }
             R.id.ll_Fifth -> {
@@ -108,11 +83,11 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
                 drawerLayout.closeDrawer(navigationView, true)
             }
             R.id.ll_Sixth -> {
-                val moveToLogin = Intent(this@ReceiptActivity, LoginActivity::class.java)
+                val moveToLogin = Intent(this, LoginActivity::class.java)
                 startActivity(moveToLogin)
             }
             R.id.ll_Seventh -> {
-                val moveToSignUp = Intent(this@ReceiptActivity, SignUpActivity::class.java)
+                val moveToSignUp = Intent(this, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
             }
             else -> {
@@ -124,7 +99,7 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(this@ReceiptActivity, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {
@@ -138,4 +113,5 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
     override fun onDestroy() {
         super.onDestroy()
     }
+
 }
