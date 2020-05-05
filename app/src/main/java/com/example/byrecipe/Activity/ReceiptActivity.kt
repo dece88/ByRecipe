@@ -35,6 +35,8 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
 
         list.addAll(getListResep())
         showRecyclerList()
+
+        onSetNavigationDrawerEvents()
     }
 
     fun getListResep(): ArrayList<Resep> {
@@ -62,15 +64,15 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
 
     private fun onSetNavigationDrawerEvents() {
         navigationBar.setOnClickListener(this)
-        ll_First.setOnClickListener(this)
-        ll_Second.setOnClickListener(this)
-        ll_Third.setOnClickListener(this)
-        ll_Fourth.setOnClickListener(this)
-        ll_Fifth.setOnClickListener(this)
-        ll_Sixth.setOnClickListener(this)
-        ll_Seventh.setOnClickListener(this)
-        iv_logout.setOnClickListener(this)
-        tv_logout.setOnClickListener(this)
+//        ll_First.setOnClickListener(this)
+//        ll_Second.setOnClickListener(this)
+//        ll_Third.setOnClickListener(this)
+//        ll_Fourth.setOnClickListener(this)
+//        ll_Fifth.setOnClickListener(this)
+//        ll_Sixth.setOnClickListener(this)
+//        ll_Seventh.setOnClickListener(this)
+//        iv_logout.setOnClickListener(this)
+//        tv_logout.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {

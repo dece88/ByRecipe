@@ -17,7 +17,7 @@ class ContactActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
 
-
+        onSetNavigationDrawerEvents()
     }
 
     private fun onSetNavigationDrawerEvents() {
@@ -39,8 +39,9 @@ class ContactActivity : AppCompatActivity(), View.OnClickListener {
                 drawerLayout.openDrawer(navigationView, true)
             }
             R.id.ll_First -> {
-                showToast("ll_First")
-                drawerLayout.closeDrawer(navigationView, true)
+                val moveToHome = Intent(this@ContactActivity, MainActivity::class.java)
+                startActivity(moveToHome)
+                finish()
             }
             R.id.ll_Second -> {
                 showToast("ll_Second")
