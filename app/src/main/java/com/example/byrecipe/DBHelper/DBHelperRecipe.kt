@@ -20,11 +20,12 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
         private val COL_TAHAPAN="Tahapan"
         private val COL_WAKTU="Waktu"
         private val COL_OWNER="Owner"
+        private val COL_CATEGORY="Category"
         private val COL_IMAGE="Image"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_NAMA TEXT, $COL_INGREDIENTS TEXT,$COL_TAHAPAN TEXT, $COL_WAKTU TEXT, $COL_OWNER TEXT, $COL_IMAGE BLOB)")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_NAMA TEXT, $COL_INGREDIENTS TEXT,$COL_TAHAPAN TEXT, $COL_WAKTU TEXT, $COL_OWNER TEXT, $COL_CATEGORY TEXT, $COL_IMAGE BLOB)")
 
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
@@ -42,12 +43,13 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperUser.D
         val cursor: Cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
             do {
-                val recipe = Recipe("", "", "", "", "")
+                val recipe = Recipe("", "", "", "", "", "")
                 recipe.nama = cursor.getString(cursor.getColumnIndex(COL_NAMA))
                 recipe.ingredients = cursor.getString(cursor.getColumnIndex(COL_INGREDIENTS))
                 recipe.tahapan = cursor.getString(cursor.getColumnIndex(COL_TAHAPAN))
                 recipe.waktu = cursor.getString(cursor.getColumnIndex(COL_WAKTU))
                 recipe.owner = cursor.getString(cursor.getColumnIndex(COL_OWNER))
+                recipe.category = cursor.getString(cursor.getColumnIndex(COL_CATEGORY))
 
                 listRecipes.add(recipe)
             } while(cursor.moveToNext())

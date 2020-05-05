@@ -9,10 +9,12 @@ class Recipe(
     var ingredients:String?,
     var tahapan:String?,
     var waktu:String?,
+    var category:String?,
     var owner: String?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -25,6 +27,7 @@ class Recipe(
         parcel.writeString(ingredients)
         parcel.writeString(tahapan)
         parcel.writeString(waktu)
+        parcel.writeString(category)
         parcel.writeString(owner)
     }
 
