@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ll_Fifth.setOnClickListener(this)
         ll_Sixth.setOnClickListener(this)
         ll_Seventh.setOnClickListener(this)
+        ll_Eigth.setOnClickListener(this)
         iv_logout.setOnClickListener(this)
         tv_logout.setOnClickListener(this)
     }
@@ -101,6 +102,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_Seventh -> {
                 val moveToSignUp = Intent(this@MainActivity, SignUpActivity::class.java)
                 startActivity(moveToSignUp)
+            }
+            R.id.ll_Eigth -> {
+                showToast("Account")
+                drawerLayout.closeDrawer(navigationView,true)
             }
             else -> {
                 showToast("Default")
