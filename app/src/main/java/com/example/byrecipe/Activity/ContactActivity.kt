@@ -34,8 +34,8 @@ class ContactActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onSetNavigationDrawerEvents() {
-        if(intent.getParcelableExtra<User>(UserProfileActivity.USER) != null){
-            user = intent.getParcelableExtra(UserProfileActivity.USER) as User //get session User2
+        if(intent.getParcelableExtra<User>(USER) != null){
+            user = intent.getParcelableExtra(USER) as User //get session User2
         }
         navigationBar.setOnClickListener(this)
         ll_First.setOnClickListener(this)

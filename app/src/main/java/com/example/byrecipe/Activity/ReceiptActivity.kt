@@ -27,13 +27,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
-    lateinit var user: User
+    private lateinit var user: User
     private lateinit var adapter: RecipeAdapter
     private lateinit var recipeHelper: DBHelperRecipe
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     companion object{
         const val USER = "session user"
+        const val EXTRA_NOTE = "extra_note"
+        const val STATUS = "status_recipe"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +43,14 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
         setContentView(R.layout.click_recipe)
         onSetNavigationDrawerEvents()
 
+        user = intent.getParcelableExtra(USER) as User //get session User2
         recipeHelper = DBHelperRecipe(this)
 
-        supportActionBar?.title = "Notes"
+        supportActionBar?.title = "Recipes"
         rv_recipe.layoutManager = LinearLayoutManager(this)
         rv_recipe.setHasFixedSize(true)
         adapter = RecipeAdapter(this)
+        adapter.user = this.user
         rv_recipe.adapter = adapter
 
         // proses ambil data
@@ -68,14 +72,28 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
         button_logout.setOnClickListener(this)
         recipe_plus.setOnClickListener {
             val intent = Intent(this@ReceiptActivity, FormRecipeActivity::class.java)
-            startActivityForResult(intent, FormRecipeActivity.REQUEST_ADD)
+            intent.putExtra(FormRecipeActivity.USER, user)
+            startActivity(intent)
         }
     }
 
     private fun loadRecipesAsync() {
-        user = intent.getParcelableExtra(UserProfileActivity.USER) as User //get session User2
         GlobalScope.launch(Dispatchers.Main) {
-            val recipes = recipeHelper.allRecipe //tinggal buat function
+            var recipes: ArrayList<Recipe>
+            if(intent.getStringExtra(STATUS) == "alacarte"){
+                kata.setText("Ala Carte")
+                recipes = recipeHelper.allRecipe
+            } else if(intent.getStringExtra(STATUS) == "bakery"){
+                kata.setText("Bakery")
+                recipes = recipeHelper.getRecipeByCategory(intent.getStringExtra(STATUS).toString())
+            } else if (intent.getStringExtra(STATUS) == "steak"){
+                kata.setText("Steak")
+                recipes = recipeHelper.getRecipeByCategory(intent.getStringExtra(STATUS).toString())
+            } else {
+                kata.setText("My Recipe")
+                recipes = recipeHelper.getAllUserRecipe(user)
+            }
+
 
             if (recipes.size > 0) {
                 adapter.listRecipes = recipes as ArrayList<Recipe>
@@ -86,41 +104,9 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (data != null) {
-            when (requestCode) {
-                FormRecipeActivity.REQUEST_ADD -> if (resultCode == FormRecipeActivity.RESULT_ADD) {
-                    val recipe = data.getParcelableExtra<Recipe>(FormRecipeActivity.EXTRA_NOTE)
-                    adapter.addItem(recipe)
-                    rv_recipe.smoothScrollToPosition(adapter.itemCount - 1)
-                    showSnackbarMessage("Satu item berhasil ditambahkan")
-                }
-                FormRecipeActivity.REQUEST_UPDATE -> when (resultCode) {
-                    FormRecipeActivity.RESULT_UPDATE -> {
-                        val recipe = data.getParcelableExtra<Recipe>(FormRecipeActivity.EXTRA_NOTE)
-                        val position = data.getIntExtra(FormRecipeActivity.EXTRA_POSITION, 0)
-
-                        adapter.updateItem(position, recipe)
-                        rv_recipe.smoothScrollToPosition(position)
-                        showSnackbarMessage("Satu item berhasil diubah")
-                    }
-                    FormRecipeActivity.RESULT_DELETE -> {
-                        val position = data.getIntExtra(FormRecipeActivity.EXTRA_POSITION, 0)
-                        adapter.removeItem(position)
-                        showSnackbarMessage("Satu item berhasil dihapus")
-                    }
-                }
-            }
-        }
-    }
-
     private fun showSnackbarMessage(message: String) {
         Snackbar.make(rv_recipe, message, Snackbar.LENGTH_SHORT).show()
     }
-
-
 
     override fun onClick(v: View) {
         when(v.id){
@@ -198,10 +184,6 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
                 })
                 builder.show()
             }
-            R.id.recipe_plus -> {
-                val moveToAddRecipe = Intent(this@ReceiptActivity, FormRecipeActivity::class.java)
-                startActivityForResult(moveToAddRecipe, FormRecipeActivity.REQUEST_ADD)
-            }
             else -> {
                 showToast("Default")
                 drawerLayout.closeDrawer(navigationView, true)
@@ -228,6 +210,14 @@ class ReceiptActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     override fun onStart() {
+        if(intent.getParcelableExtra<Recipe>(FormRecipeActivity.EXTRA_NOTE) != null){
+            val recipe = intent.getParcelableExtra<Recipe>(FormRecipeActivity.EXTRA_NOTE) as Recipe
+            adapter.addItem(recipe)
+            rv_recipe.smoothScrollToPosition(adapter.itemCount - 1)
+            showSnackbarMessage("Satu item berhasil ditambahkan")
+            intent.putExtra(EXTRA_NOTE, "kosong")
+        }
+
         if(intent.getParcelableExtra<User>(MainActivity.USER) == null){
             button_logout.setVisibility(View.GONE)
         } else {

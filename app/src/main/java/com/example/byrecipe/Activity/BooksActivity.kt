@@ -33,27 +33,33 @@ class BooksActivity : AppCompatActivity(), View.OnClickListener {
 
         val ALaCarteBtn = findViewById<Button>(R.id.alacarteBtn)
         ALaCarteBtn.setOnClickListener{
-            val intent = Intent(this, ClickReceiptActivity::class.java)
+            val intent = Intent(this, ReceiptActivity::class.java)
+            intent.putExtra(ReceiptActivity.USER, user)
+            intent.putExtra(ReceiptActivity.STATUS, "alacarte")
             startActivity(intent)
         }
 
         val bakeryBtn = findViewById<Button>(R.id.bakeryBtn)
         bakeryBtn.setOnClickListener{
-//            val intent = Intent(this, BakeryActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, ReceiptActivity::class.java)
+            intent.putExtra(ReceiptActivity.USER, user)
+            intent.putExtra(ReceiptActivity.STATUS, "bakery")
+            startActivity(intent)
         }
 
         val steakBtn = findViewById<Button>(R.id.steakBtn)
         steakBtn.setOnClickListener{
-//            val intent = Intent(this, BakeryActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, ReceiptActivity::class.java)
+            intent.putExtra(ReceiptActivity.USER, user)
+            intent.putExtra(ReceiptActivity.STATUS, "steak")
+            startActivity(intent)
         }
 
         onSetNavigationDrawerEvents()
     }
 
     private fun onSetNavigationDrawerEvents() {
-        user = intent.getParcelableExtra(UserProfileActivity.USER) as User //get session User2
+        user = intent.getParcelableExtra(USER) as User //get session User2
         navigationBar.setOnClickListener(this)
         ll_First.setOnClickListener(this)
         ll_Second.setOnClickListener(this)

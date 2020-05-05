@@ -5,7 +5,10 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.example.byrecipe.Model.Recipe
+import com.example.byrecipe.Model.User
 
 class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe.DATABASE_NAME, null, DBHelperRecipe.DATABASE_VER) {
 
@@ -15,6 +18,7 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe
 
         //Table
         private val TABLE_NAME="Recipe"
+        private val COL_ID="Id"
         private val COL_NAMA="Nama"
         private val COL_INGREDIENTS = "Ingredients"
         private val COL_TAHAPAN="Tahapan"
@@ -25,7 +29,7 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_NAMA TEXT, $COL_INGREDIENTS TEXT,$COL_TAHAPAN TEXT, $COL_WAKTU TEXT, $COL_OWNER TEXT, $COL_CATEGORY TEXT, $COL_IMAGE BLOB)")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_NAMA TEXT, $COL_INGREDIENTS TEXT,$COL_TAHAPAN TEXT, $COL_WAKTU TEXT, $COL_OWNER TEXT, $COL_CATEGORY TEXT, $COL_IMAGE BLOB)")
 
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
@@ -36,14 +40,61 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe
     }
 
     //CRUD
-    val allRecipe:List<Recipe> get () {
+    val allRecipe:ArrayList<Recipe> get () {
         val listRecipes = ArrayList<Recipe>()
         val selectQuery = "SELECT * FROM $TABLE_NAME"
         val db = this.writableDatabase
         val cursor: Cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
             do {
-                val recipe = Recipe("", "", "", "", "", "")
+                val recipe = Recipe(0,"", "", "", "", "", "")
+                recipe.id = cursor.getInt(cursor.getColumnIndex(COL_ID))
+                recipe.nama = cursor.getString(cursor.getColumnIndex(COL_NAMA))
+                recipe.ingredients = cursor.getString(cursor.getColumnIndex(COL_INGREDIENTS))
+                recipe.tahapan = cursor.getString(cursor.getColumnIndex(COL_TAHAPAN))
+                recipe.waktu = cursor.getString(cursor.getColumnIndex(COL_WAKTU))
+                recipe.owner = cursor.getString(cursor.getColumnIndex(COL_OWNER))
+                recipe.category = cursor.getString(cursor.getColumnIndex(COL_CATEGORY))
+
+                listRecipes.add(recipe)
+            } while(cursor.moveToNext())
+        }
+        db.close()
+        return listRecipes
+    }
+
+    fun getRecipeByCategory(status: String): ArrayList<Recipe>{
+        val listRecipes = ArrayList<Recipe>()
+        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $COL_CATEGORY ='"+status+"'"
+        val db = this.writableDatabase
+        val cursor: Cursor = db.rawQuery(selectQuery, null)
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe = Recipe(0,"", "", "", "", "", "")
+                recipe.id = cursor.getInt(cursor.getColumnIndex(COL_ID))
+                recipe.nama = cursor.getString(cursor.getColumnIndex(COL_NAMA))
+                recipe.ingredients = cursor.getString(cursor.getColumnIndex(COL_INGREDIENTS))
+                recipe.tahapan = cursor.getString(cursor.getColumnIndex(COL_TAHAPAN))
+                recipe.waktu = cursor.getString(cursor.getColumnIndex(COL_WAKTU))
+                recipe.owner = cursor.getString(cursor.getColumnIndex(COL_OWNER))
+                recipe.category = cursor.getString(cursor.getColumnIndex(COL_CATEGORY))
+
+                listRecipes.add(recipe)
+            } while(cursor.moveToNext())
+        }
+        db.close()
+        return listRecipes
+    }
+
+    fun getAllUserRecipe(user: User): ArrayList<Recipe>{
+        val listRecipes = ArrayList<Recipe>()
+        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $COL_OWNER ='"+user.email+"'"
+        val db = this.writableDatabase
+        val cursor: Cursor = db.rawQuery(selectQuery, null)
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe = Recipe(0,"", "", "", "", "", "")
+                recipe.id = cursor.getInt(cursor.getColumnIndex(COL_ID))
                 recipe.nama = cursor.getString(cursor.getColumnIndex(COL_NAMA))
                 recipe.ingredients = cursor.getString(cursor.getColumnIndex(COL_INGREDIENTS))
                 recipe.tahapan = cursor.getString(cursor.getColumnIndex(COL_TAHAPAN))
@@ -95,19 +146,22 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe
 //        return user
 //    }
 //
-    fun addRecipe(recipe: Recipe){
+    fun addRecipe(recipe: Recipe, dataImage: ByteArray, user: User) : Long {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAMA, recipe.nama)
         values.put(COL_INGREDIENTS, recipe.ingredients)
         values.put(COL_TAHAPAN, recipe.tahapan)
         values.put(COL_WAKTU, recipe.waktu)
-        values.put(COL_OWNER, recipe.waktu)
+        values.put(COL_OWNER, user.email)
         values.put(COL_CATEGORY, recipe.category)
-        values.putNull(COL_IMAGE)
+        if(dataImage == null){
+            values.putNull(COL_IMAGE)
+        } else {
+            values.put(COL_IMAGE, dataImage)
+        }
 
-        db.insert(TABLE_NAME, null, values)
-        db.close()
+        return db.insert(TABLE_NAME, null, values)
     }
 
     fun updateRecipe(recipe: Recipe):Int{
@@ -141,26 +195,26 @@ class DBHelperRecipe(context: Context): SQLiteOpenHelper(context, DBHelperRecipe
 //        return db.update(TABLE_NAME, values, "$COL_EMAIL=?", arrayOf(user.email.toString()))
 //    }
 //
-//    fun getImageProfile(user: User): Bitmap? {
-//        var bmImage: Bitmap?
-//        val selectQuery = "SELECT $COL_IMAGE FROM $TABLE_NAME WHERE $COL_EMAIL='" + user.email.toString() + "'"
-//        val db = this.writableDatabase
-//        val cursor = db.rawQuery(selectQuery, null)
-//
-//        if (cursor.moveToFirst()){
-//            if(cursor.getBlob(0)!=null){
-//                var imgByte: ByteArray = cursor.getBlob(0)
-//                bmImage = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.size)
-//                cursor.close()
-//                return bmImage
-//            } else {
-//                return null
-//            }
-//        } else {
-//            cursor.close()
-//        }
-//        return null
-//    }
+    fun getImageProfile(recipe:Recipe): Bitmap? {
+        var bmImage: Bitmap?
+        val selectQuery = "SELECT $COL_IMAGE FROM $TABLE_NAME WHERE $COL_ID='" + recipe.id + "'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor.moveToFirst()){
+            if(cursor.getBlob(0)!=null){
+                var imgByte: ByteArray = cursor.getBlob(0)
+                bmImage = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.size)
+                cursor.close()
+                return bmImage
+            } else {
+                return null
+            }
+        } else {
+            cursor.close()
+        }
+        return null
+    }
 //
 //    fun deleteUser(user: User){
 //        val db = this.writableDatabase

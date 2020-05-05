@@ -19,16 +19,9 @@
         <activity android:name=".Activity.ForgotPasswordActivity" />
         <activity android:name=".Activity.SignUpActivity" />
         <activity android:name=".Activity.LoginActivity" />
-<<<<<<< HEAD
         <activity android:name=".Activity.ReceiptActivity" />
         <activity android:name=".Activity.AboutUsActivity" />
         <activity android:name=".Activity.BooksActivity" />
-=======
-        <activity android:name=".Activity.ReceiptActivity"/>
-        <activity android:name=".Activity.AboutUsActivity"/>
-        <activity android:name=".Activity.BooksActivity"/>
-        <activity android:name=".Activity.ClickReceiptActivity"/>
->>>>>>> a847f74eb2fc59f8d918124fc550ad819c4c6685
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

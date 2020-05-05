@@ -5,6 +5,7 @@ import android.os.Parcelable
 
 
 class Recipe(
+    var id: Int = 0,
     var nama:String?,
     var ingredients:String?,
     var tahapan:String?,
@@ -14,6 +15,7 @@ class Recipe(
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -23,6 +25,7 @@ class Recipe(
     ) {}
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(nama)
         parcel.writeString(ingredients)
         parcel.writeString(tahapan)
@@ -35,12 +38,12 @@ class Recipe(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<User> {
-        override fun createFromParcel(parcel: Parcel): User {
-            return User(parcel)
+    companion object CREATOR : Parcelable.Creator<Recipe> {
+        override fun createFromParcel(parcel: Parcel): Recipe {
+            return Recipe(parcel)
         }
 
-        override fun newArray(size: Int): Array<User?> {
+        override fun newArray(size: Int): Array<Recipe?> {
             return arrayOfNulls(size)
         }
     }
