@@ -12,8 +12,8 @@ import com.example.byrecipe.Model.User
 class DBHelperUser(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
 
     companion object{
-        private val DATABASE_VER = 1
-        private val DATABASE_NAME = "ByRecipe.dbUser"
+        internal val DATABASE_VER = 1
+        val DATABASE_NAME = "ByRecipe.dbUser"
 
         //Table
         private val TABLE_NAME="User"

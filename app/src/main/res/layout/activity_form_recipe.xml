@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SignUpActivity"
+    android:background="@drawable/form_recipe_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_border_container"
+        android:padding="25dp"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/byrecipe_logo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/logo_byrecipe"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/form_page_nama"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/byrecipe_logo"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text|textCapWords"
+            android:hint="    Food Name"
+            android:drawableRight="@drawable/food"/>
+
+        <EditText
+            android:id="@+id/form_page_time"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/form_page_nama"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:hint="    Time"
+            android:drawableRight="@drawable/alarm"/>
+
+        <EditText
+            android:id="@+id/form_page_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/form_page_time"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text|textMultiLine"
+            android:hint="    Ingredients"
+            android:drawableRight="@drawable/ingredients"/>
+
+        <EditText
+            android:id="@+id/form_page_tahapan"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_below="@id/form_page_ingredients"
+            android:layout_margin="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/rounded_border_edittext"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:inputType="text|textMultiLine"
+            android:hint="    Note Tahapan"
+            android:drawableRight="@drawable/note"/>
+
+        <LinearLayout
+            android:id="@+id/page_form_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/form_page_tahapan"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/form_page_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/food"/>
+
+            <Button
+                android:id="@+id/form_page_button_uploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="25dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/rounded_border_button_red"
+                android:textColor="@android:color/black"
+                android:textSize="10sp"
+                android:text="Upload"
+                android:drawableRight="@drawable/kamera"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/form_page_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/page_form_layout"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_border_button_blue"
+            android:text="Register"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</LinearLayout>

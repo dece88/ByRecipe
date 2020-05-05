@@ -87,8 +87,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(moveToContact)
             }
             R.id.ll_Fifth -> {
-                showToast("ll_Fifth")
+                showToast("My Recipe")
                 drawerLayout.closeDrawer(navigationView, true)
+                val moveToMyRecipe = Intent(this@MainActivity, ReceiptActivity::class.java)
+                startActivity(moveToMyRecipe)
             }
             R.id.ll_Sixth -> {
                 val moveToLogin = Intent(this@MainActivity, LoginActivity::class.java)
