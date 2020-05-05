@@ -1,4 +1,4 @@
-package com.example.byrecipe.Model
+package com.example.byrecipe.Adapter
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.byrecipe.Activity.FormRecipeActivity
 import com.example.byrecipe.CustomOnItemClickListener
+import com.example.byrecipe.Model.Recipe
 import com.example.byrecipe.R
 import kotlinx.android.synthetic.main.recipe_row.view.*
 
@@ -56,10 +57,10 @@ class RecipeAdapter (private val activity: Activity) : RecyclerView.Adapter<Reci
 
                 cv_item_recipe.setOnClickListener(CustomOnItemClickListener(adapterPosition, object : CustomOnItemClickListener.OnItemClickCallback {
                     override fun onItemClicked(view: View, position: Int) {
-//                        val intent = Intent(activity, FormRecipeActivity::class.java)
-//                        intent.putExtra(FormRecipeActivity.EXTRA_POSITION, position)
-//                        intent.putExtra(FormRecipeActivity.EXTRA_NOTE, recipe)
-//                        activity.startActivityForResult(intent, FormRecipeActivity.REQUEST_UPDATE)
+                        val intent = Intent(activity, FormRecipeActivity::class.java)
+                        intent.putExtra(FormRecipeActivity.EXTRA_POSITION, position)
+                        intent.putExtra(FormRecipeActivity.EXTRA_NOTE, recipe)
+                        activity.startActivityForResult(intent, FormRecipeActivity.REQUEST_UPDATE)
                     }
                 }))
             }

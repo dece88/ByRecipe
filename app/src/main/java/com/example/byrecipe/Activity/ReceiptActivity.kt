@@ -5,31 +5,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.byrecipe.Adapter.RecipeAdapter
 import com.example.byrecipe.DBHelper.DBHelperRecipe
-import com.example.byrecipe.DBHelper.DBHelperUser
 import com.example.byrecipe.Model.*
 import com.example.byrecipe.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_recipe.*
 import kotlinx.android.synthetic.main.activity_recipe.navigationBar
-import kotlinx.android.synthetic.main.click_recipe.*
 import kotlinx.android.synthetic.main.click_recipe.drawerLayout
 import kotlinx.android.synthetic.main.click_recipe.navigationView
 import kotlinx.android.synthetic.main.header_menu.*
-import kotlinx.android.synthetic.main.layout_dashboard.*
 import kotlinx.android.synthetic.main.layout_side_menu.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ReceiptActivity : AppCompatActivity(), View.OnClickListener{

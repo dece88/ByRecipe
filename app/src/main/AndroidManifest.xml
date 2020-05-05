@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.FormRecipeActivity"></activity>
+        <activity android:name=".Activity.ClickReceiptActivity"></activity>
+        <activity android:name=".Activity.FormRecipeActivity" />
         <activity android:name=".Activity.ContactActivity" />
         <activity android:name=".Activity.EditUserProfileActivity" />
         <activity android:name=".Activity.UserProfileActivity" />
         <activity android:name=".Activity.ForgotPasswordActivity" />
         <activity android:name=".Activity.SignUpActivity" />
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.ReceiptActivity"/>
-        <activity android:name=".Activity.AboutUsActivity"/>
-        <activity android:name=".Activity.BooksActivity"/>
+        <activity android:name=".Activity.ReceiptActivity" />
+        <activity android:name=".Activity.AboutUsActivity" />
+        <activity android:name=".Activity.BooksActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
