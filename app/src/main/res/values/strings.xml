@@ -13,7 +13,7 @@
         <item>Oglio olio</item>
         <item>Oglio olio</item>
         <item>Oglio olio</item>
-        <item>Oglio olio</item>
+        <item></item>
     </string-array>
 
     <string-array name="data_description">
@@ -24,7 +24,7 @@
         <item>35 minute</item>
         <item>35 minute</item>
         <item>35 minute</item>
-        <item>35 minute</item>
+        <item></item>
     </string-array>
 
     <string-array name="data_photo">
