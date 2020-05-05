@@ -21,6 +21,7 @@
         <activity android:name=".Activity.ReceiptActivity"/>
         <activity android:name=".Activity.AboutUsActivity"/>
         <activity android:name=".Activity.BooksActivity"/>
+        <activity android:name=".Activity.ClickReceiptActivity"/>
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
